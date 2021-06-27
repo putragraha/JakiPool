@@ -60,11 +60,11 @@ class MainActivity : AppCompatActivity() {
                 faskesListAdapter.submitList(faskesList)
             }
             val warningDrawableResId = when {
-                faskesList.isEmpty() -> R.drawable.ic_empty
+                !mainState.error && faskesList.isEmpty() -> R.drawable.ic_empty
                 else -> R.drawable.ic_error
             }
             val warningTextResId = when {
-                faskesList.isEmpty() -> R.string.empty_title
+                !mainState.error && faskesList.isEmpty() -> R.string.empty_title
                 else -> R.string.error_title
             }
 
