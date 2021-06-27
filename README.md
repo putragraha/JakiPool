@@ -6,5 +6,5 @@ Show List of Faskes & Detaied Address which has Available Date for Vaccination
 - Coroutine
 - Retrofit
 - Moshi
-- Hilt
+- Hilt, implement MultiBinds
 - MVVM
