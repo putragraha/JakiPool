@@ -1,15 +1,17 @@
 package nsystem.tools.jakipool.repository
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import nsystem.tools.jakipool.api.JakiApi
 import nsystem.tools.jakipool.common.Result
 import javax.inject.Inject
 
 class JakiRepository @Inject constructor(private val jakiApi: JakiApi) {
 
-    suspend fun getFaskesList(): Result {
+    suspend fun getFaskesList(): Flow<Result> = flow {
         try {
             val faskesResponse = jakiApi.getAllFaskes()
-            return when (faskesResponse.isSuccessful) {
+            val result = when (faskesResponse.isSuccessful) {
                 true -> {
                     val faskesList = faskesResponse.body()?.map { faskes ->
                         faskes.apply {
@@ -20,8 +22,10 @@ class JakiRepository @Inject constructor(private val jakiApi: JakiApi) {
                 }
                 false -> Result.Error
             }
+
+            emit(result)
         } catch (exception: Exception) {
-            return Result.Error
+            emit(Result.Error)
         }
     }
 

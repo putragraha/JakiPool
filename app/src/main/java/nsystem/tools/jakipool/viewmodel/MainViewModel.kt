@@ -3,6 +3,7 @@ package nsystem.tools.jakipool.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import nsystem.tools.jakipool.common.Result
 import nsystem.tools.jakipool.model.Faskes
@@ -19,21 +20,23 @@ class MainViewModel @Inject constructor(private val jakiRepository: JakiReposito
         faskesListLiveData.postValue(initialState)
 
         viewModelScope.launch {
-            val state = when (val result = jakiRepository.getFaskesList()) {
-                is Result.SuccessGetFaskesList -> {
-                    MainState(
+            jakiRepository.getFaskesList().collect { result ->
+                val state = when (result) {
+                    is Result.SuccessGetFaskesList -> {
+                        MainState(
+                            loading = false,
+                            error = false,
+                            faskesList = result.data
+                        )
+                    }
+                    else -> MainState(
                         loading = false,
-                        error = false,
-                        faskesList = result.data
+                        error = true,
+                        faskesList = emptyList()
                     )
                 }
-                else -> MainState(
-                    loading = false,
-                    error = true,
-                    faskesList = emptyList()
-                )
+                faskesListLiveData.postValue(state)
             }
-            faskesListLiveData.postValue(state)
         }
     }
 
