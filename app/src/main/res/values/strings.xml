@@ -3,4 +3,5 @@
     <string name="main_title">Jaki Available Date</string>
     <string name="error_title">Eh…error</string>
     <string name="empty_title">Gak ada Faskes yang bisa</string>
+    <string name="label_child_title">Child Recycler View</string>
 </resources>
