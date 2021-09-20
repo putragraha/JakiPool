@@ -1,11 +1,12 @@
-package nsystem.tools.jakipool
+package nsystem.tools.jakipool.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import nsystem.tools.jakipool.R
 import nsystem.tools.jakipool.databinding.ItemTestBinding
 
-class TestListChildAdapter: RecyclerView.Adapter<TestListChildAdapter.TestViewHolder>()  {
+class PagerSnapChildAdapter: RecyclerView.Adapter<PagerSnapChildAdapter.TestViewHolder>()  {
 
     private val testList = mutableListOf<String>()
 

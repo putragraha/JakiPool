@@ -1,5 +1,6 @@
 package nsystem.tools.jakipool.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding?.root)
         viewModel.getFaskesList()
         setupRecyclerView()
+        setupButton()
         observeFaskesList()
     }
 
@@ -44,6 +46,12 @@ class MainActivity : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter = faskesListAdapter
             }
+        }
+    }
+
+    private fun setupButton() {
+        binding?.btnPagerSnapCustomView?.setOnClickListener {
+            startActivity(Intent(this, PagerSnapActivity::class.java))
         }
     }
 
